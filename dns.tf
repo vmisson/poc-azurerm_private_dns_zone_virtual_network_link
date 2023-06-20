@@ -19,4 +19,7 @@ module "dns-vnet-link" {
   resource_group_name   = "private-dns-zones-rg"
   private_dns_zone_name = each.value
   virtual_network_ids   = [resource.azurerm_virtual_network.vnet1.id, resource.azurerm_virtual_network.vnet2.id]
+
+  # Create the DNS VNet Link after the VNet has been created
+  depends_on = [azurerm_virtual_network.vnet1, azurerm_virtual_network.vnet2]
 }
